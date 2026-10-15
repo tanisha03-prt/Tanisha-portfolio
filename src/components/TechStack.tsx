@@ -10,6 +10,15 @@ import {
   CylinderCollider,
   RapierRigidBody,
 } from "@react-three/rapier";
+import {
+  FaCode,
+  FaLaptopCode,
+  FaServer,
+  FaDatabase,
+  FaWrench,
+  FaBrain,
+} from "react-icons/fa6";
+import "./styles/TechStack.css";
 
 const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
@@ -124,16 +133,54 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
   );
 }
 
-const TechStack = () => {
+const skillCategories = [
+  {
+    category: "Languages",
+    icon: FaCode,
+    skills: ["Java", "Python", "JavaScript", "SQL"],
+  },
+  {
+    category: "Frontend",
+    icon: FaLaptopCode,
+    skills: ["HTML", "CSS", "React", "Bootstrap"],
+  },
+  {
+    category: "Backend",
+    icon: FaServer,
+    skills: ["Node.js", "Express", "Flask"],
+  },
+  {
+    category: "Database",
+    icon: FaDatabase,
+    skills: ["MySQL"],
+  },
+  {
+    category: "Tools & Workflow",
+    icon: FaWrench,
+    skills: ["Git", "GitHub", "VS Code"],
+  },
+  {
+    category: "Core Concepts",
+    icon: FaBrain,
+    skills: ["DSA", "DBMS", "Machine Learning", "System Design"],
+  },
+];
+
+type TechStackProps = {
+  isDesktopView?: boolean;
+};
+
+const TechStack = ({ isDesktopView = true }: TechStackProps) => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
+      const workEl = document.getElementById("work");
+      if (workEl) {
+        const threshold = workEl.getBoundingClientRect().top;
+        setIsActive(scrollY > threshold);
+      }
     };
     document.querySelectorAll(".header a").forEach((elem) => {
       const element = elem as HTMLAnchorElement;
@@ -167,46 +214,82 @@ const TechStack = () => {
   }, []);
 
   return (
-    <div className="techstack">
-      <h2> My Techstack</h2>
+    <div className="techstack" id="techstack">
+      <div className="tech-header">
+        <h2 className="tech-title">
+          My <span>Tech Stack</span>
+        </h2>
+        <p className="tech-subtitle">
+          Core languages, frameworks, developer tools, and foundational concepts
+        </p>
+      </div>
 
-      <Canvas
-        shadows
-        gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
-        camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-        onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
-        className="tech-canvas"
-      >
-        <ambientLight intensity={1} />
-        <spotLight
-          position={[20, 20, 25]}
-          penumbra={1}
-          angle={0.2}
-          color="white"
-          castShadow
-          shadow-mapSize={[512, 512]}
-        />
-        <directionalLight position={[0, 5, -4]} intensity={2} />
-        <Physics gravity={[0, 0, 0]}>
-          <Pointer isActive={isActive} />
-          {spheres.map((props, i) => (
-            <SphereGeo
-              key={i}
-              {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
-              isActive={isActive}
+      {isDesktopView && (
+        <div className="tech-canvas-wrapper">
+          <Canvas
+            shadows
+            gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
+            camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
+            onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
+            className="tech-canvas"
+          >
+            <ambientLight intensity={1} />
+            <spotLight
+              position={[20, 20, 25]}
+              penumbra={1}
+              angle={0.2}
+              color="white"
+              castShadow
+              shadow-mapSize={[512, 512]}
             />
-          ))}
-        </Physics>
-        <Environment
-          files="/models/char_enviorment.hdr"
-          environmentIntensity={0.5}
-          environmentRotation={[0, 4, 2]}
-        />
-        <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
-        </EffectComposer>
-      </Canvas>
+            <directionalLight position={[0, 5, -4]} intensity={2} />
+            <Physics gravity={[0, 0, 0]}>
+              <Pointer isActive={isActive} />
+              {spheres.map((props, i) => (
+                <SphereGeo
+                  key={i}
+                  {...props}
+                  material={
+                    materials[Math.floor(Math.random() * materials.length)]
+                  }
+                  isActive={isActive}
+                />
+              ))}
+            </Physics>
+            <Environment
+              files="/models/char_enviorment.hdr"
+              environmentIntensity={0.5}
+              environmentRotation={[0, 4, 2]}
+            />
+            <EffectComposer enableNormalPass={false}>
+              <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
+            </EffectComposer>
+          </Canvas>
+          <div className="tech-canvas-hint">
+            Interactive 3D Physics &bull; Move cursor to repel
+          </div>
+        </div>
+      )}
+
+      <div className="tech-skills-container">
+        {skillCategories.map((cat, idx) => (
+          <div className="tech-skill-card" key={idx}>
+            <div className="tech-card-header">
+              <div className="tech-card-icon-wrap">
+                <cat.icon className="tech-card-icon" />
+              </div>
+              <h3 className="tech-card-title">{cat.category}</h3>
+            </div>
+            <div className="tech-skill-pills">
+              {cat.skills.map((skill, sIdx) => (
+                <span className="tech-pill" key={sIdx}>
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -234,10 +234,18 @@
 .what-tags {
   font-size: 13px;
   font-weight: 400;
-  padding: 2px 7px;
-  background-color: rgba(255, 255, 255, 0.15);
-  border: 1px solid #ffffff50;
+  padding: 2px 9px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 30px;
+  transition: all 0.25s ease;
+}
+.what-tags:hover {
+  background-color: rgba(194, 164, 255, 0.2);
+  border-color: var(--accentColor);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(194, 164, 255, 0.25);
 }
 @media only screen and (max-width: 1600px) {
   .what-box h2 {
