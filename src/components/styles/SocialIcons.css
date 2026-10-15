@@ -47,39 +47,36 @@
   position: absolute;
   z-index: 99;
   display: flex;
-  gap: 5px;
-  bottom: 40px;
+  align-items: center;
+  gap: 6px;
+  bottom: 20px;
   right: 0;
   width: auto;
   text-wrap: nowrap;
-  letter-spacing: 4px;
-  font-size: 15px;
-  line-height: 15px;
+  letter-spacing: 2px;
+  font-size: 13px;
+  line-height: 13px;
   font-weight: 600;
-  color: #5e5e5e;
+  color: #eae5ec;
   cursor: pointer;
-  transition: 0.5s;
-  transform-origin: left bottom;
-  transform: translateX(100%) rotateZ(-90deg);
+  transition: all 0.3s ease;
+  background: rgba(18, 15, 28, 0.75);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(194, 164, 255, 0.2);
+  backdrop-filter: blur(8px);
 }
 .resume-button:hover {
-  color: #fff;
+  color: #ffffff;
+  border-color: var(--accentColor);
+  box-shadow: 0 0 12px rgba(194, 164, 255, 0.25);
+  transform: translateY(-2px);
 }
-div.resume-button span {
-  color: #fff;
-  font-size: 17px;
-  margin-top: -1px;
+.resume-button span {
+  color: var(--accentColor);
+  font-size: 15px;
   display: flex;
   align-items: center;
-}
-.check-line {
-  position: fixed;
-  top: 655px;
-  left: 0;
-  height: 1px;
-  background-color: #ffffff;
-  width: 100%;
-  z-index: 99999;
 }
 @media only screen and (min-width: 900px) {
   .social-icons {
@@ -92,12 +89,13 @@ div.resume-button span {
 }
 @media only screen and (min-width: 768px) {
   .resume-button {
-    transform: none;
-    font-size: 20px;
-    line-height: 20px;
+    bottom: 25px;
+    font-size: 15px;
+    line-height: 15px;
+    padding: 8px 18px;
+    letter-spacing: 3px;
   }
-  div.resume-button span {
-    font-size: 23px;
-    margin-top: -1.5px;
+  .resume-button span {
+    font-size: 18px;
   }
 }
