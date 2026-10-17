@@ -9,18 +9,20 @@ export default function handleResize(
   character: THREE.Object3D
 ) {
   if (!canvasDiv.current) return;
-  let canvas3d = canvasDiv.current.getBoundingClientRect();
+  const canvas3d = canvasDiv.current.getBoundingClientRect();
   const width = canvas3d.width;
   const height = canvas3d.height;
   renderer.setSize(width, height);
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  const workTrigger = ScrollTrigger.getById("work");
+
   ScrollTrigger.getAll().forEach((trigger) => {
-    if (trigger != workTrigger) {
+    const id = trigger.vars.id;
+    if (id !== "work" && id !== "work-desktop" && id !== "work-mobile") {
       trigger.kill();
     }
   });
+
   setCharTimeline(character, camera);
   setAllTimeline();
 }
