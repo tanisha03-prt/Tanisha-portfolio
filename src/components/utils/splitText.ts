@@ -13,11 +13,12 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 export default function setSplitText() {
   ScrollTrigger.config({ ignoreMobileResize: true });
   if (window.innerWidth < 900) return;
+
   const paras: NodeListOf<ParaElement> = document.querySelectorAll(".para");
   const titles: NodeListOf<ParaElement> = document.querySelectorAll(".title");
 
-  const TriggerStart = window.innerWidth <= 1024 ? "top 60%" : "20% 60%";
-  const ToggleAction = "play pause resume reverse";
+  const triggerStart = window.innerWidth <= 1024 ? "top 60%" : "20% 60%";
+  const toggleAction = "play pause resume reverse";
 
   paras.forEach((para: ParaElement) => {
     para.classList.add("visible");
@@ -38,8 +39,8 @@ export default function setSplitText() {
         autoAlpha: 1,
         scrollTrigger: {
           trigger: para.parentElement?.parentElement,
-          toggleActions: ToggleAction,
-          start: TriggerStart,
+          toggleActions: toggleAction,
+          start: triggerStart,
         },
         duration: 1,
         ease: "power3.out",
@@ -48,6 +49,7 @@ export default function setSplitText() {
       }
     );
   });
+
   titles.forEach((title: ParaElement) => {
     if (title.anim) {
       title.anim.progress(1).kill();
@@ -64,8 +66,8 @@ export default function setSplitText() {
         autoAlpha: 1,
         scrollTrigger: {
           trigger: title.parentElement?.parentElement,
-          toggleActions: ToggleAction,
-          start: TriggerStart,
+          toggleActions: toggleAction,
+          start: triggerStart,
         },
         duration: 0.8,
         ease: "power2.inOut",
@@ -75,6 +77,4 @@ export default function setSplitText() {
       }
     );
   });
-
-  ScrollTrigger.addEventListener("refresh", () => setSplitText());
 }
