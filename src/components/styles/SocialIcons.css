@@ -26,8 +26,8 @@
   /* transform: scale(1.2); */
 }
 .social-icons span {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   position: relative;
   display: flex;
 }
@@ -39,7 +39,7 @@
   top: var(--siTop, 50%);
   transform: translate(-50%, -50%);
   display: flex;
-  font-size: 23px;
+  font-size: 20px;
   will-change: left, top;
   transition: transform 0.3s ease-out;
 }
@@ -53,9 +53,9 @@
   right: 0;
   width: auto;
   text-wrap: nowrap;
-  letter-spacing: 2px;
-  font-size: 13px;
-  line-height: 13px;
+  letter-spacing: 1.5px;
+  font-size: 12.5px;
+  line-height: 12.5px;
   font-weight: 600;
   color: #eae5ec;
   cursor: pointer;
@@ -74,28 +74,28 @@
 }
 .resume-button span {
   color: var(--accentColor);
-  font-size: 15px;
+  font-size: 14px;
   display: flex;
   align-items: center;
 }
 @media only screen and (min-width: 900px) {
   .social-icons {
     display: flex;
-    gap: 20px;
+    gap: 14px;
   }
   .social-icons a {
-    font-size: 28px;
+    font-size: 22px;
   }
 }
 @media only screen and (min-width: 768px) {
   .resume-button {
-    bottom: 25px;
-    font-size: 15px;
-    line-height: 15px;
-    padding: 8px 18px;
-    letter-spacing: 3px;
+    bottom: 22px;
+    font-size: 13.5px;
+    line-height: 13.5px;
+    padding: 7px 16px;
+    letter-spacing: 2px;
   }
   .resume-button span {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
