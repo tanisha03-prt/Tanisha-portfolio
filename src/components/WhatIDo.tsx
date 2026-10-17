@@ -8,8 +8,9 @@ const WhatIDo = () => {
     containerRef.current[index] = el;
   };
   useEffect(() => {
+    const containers = [...containerRef.current];
     if (ScrollTrigger.isTouch) {
-      containerRef.current.forEach((container) => {
+      containers.forEach((container) => {
         if (container) {
           container.classList.remove("what-noTouch");
           container.addEventListener("click", () => handleClick(container));
@@ -17,7 +18,7 @@ const WhatIDo = () => {
       });
     }
     return () => {
-      containerRef.current.forEach((container) => {
+      containers.forEach((container) => {
         if (container) {
           container.removeEventListener("click", () => handleClick(container));
         }
@@ -90,24 +91,25 @@ const WhatIDo = () => {
               <h3>FULL-STACK</h3>
               <h4>Web &amp; Software Development</h4>
               <p>
-                Building responsive frontend applications and robust backend services.
+                Architecting responsive frontends and robust backend microservices.
                 Focused on clean architecture, RESTful APIs, and efficient database
-                management with modern frameworks and libraries.
+                engineering with modern frameworks and resilient data stores.
               </p>
               <h5>Skillset &amp; tools</h5>
               <div className="what-content-flex">
                 <div className="what-tags">Java</div>
                 <div className="what-tags">Python</div>
                 <div className="what-tags">JavaScript</div>
-                <div className="what-tags">React</div>
+                <div className="what-tags">React.js</div>
                 <div className="what-tags">Node.js</div>
-                <div className="what-tags">Express</div>
+                <div className="what-tags">Express.js</div>
                 <div className="what-tags">Flask</div>
-                <div className="what-tags">HTML</div>
-                <div className="what-tags">CSS</div>
-                <div className="what-tags">Bootstrap</div>
+                <div className="what-tags">REST APIs</div>
                 <div className="what-tags">MySQL</div>
-                <div className="what-tags">Git</div>
+                <div className="what-tags">PostgreSQL</div>
+                <div className="what-tags">MongoDB</div>
+                <div className="what-tags">Redis</div>
+                <div className="what-tags">Git &amp; GitHub</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -132,23 +134,27 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
             <div className="what-content-in">
               <h3>PROBLEM SOLVING</h3>
-              <h4>Algorithms &amp; System Design</h4>
+              <h4>Algorithms, Core CS &amp; Machine Learning</h4>
               <p>
-                Applying strong core computer science principles to solve complex
+                Applying strong computer science foundations to analyze and solve
                 algorithmic challenges. Exploring data structures, database
-                management systems, machine learning concepts, and scalable systems.
+                management systems, operating systems, and applied machine learning.
               </p>
               <h5>Skillset &amp; tools</h5>
               <div className="what-content-flex">
                 <div className="what-tags">DSA</div>
                 <div className="what-tags">Java</div>
+                <div className="what-tags">C++</div>
                 <div className="what-tags">Python</div>
-                <div className="what-tags">SQL</div>
-                <div className="what-tags">DBMS</div>
-                <div className="what-tags">Machine Learning</div>
+                <div className="what-tags">SQL &amp; DBMS</div>
+                <div className="what-tags">OOP</div>
+                <div className="what-tags">Operating Systems</div>
+                <div className="what-tags">Computer Networks</div>
                 <div className="what-tags">System Design</div>
-                <div className="what-tags">GitHub</div>
-                <div className="what-tags">VS Code</div>
+                <div className="what-tags">Scikit-learn</div>
+                <div className="what-tags">Pandas &amp; NumPy</div>
+                <div className="what-tags">Docker</div>
+                <div className="what-tags">Linux / Ubuntu</div>
               </div>
               <div className="what-arrow"></div>
             </div>
