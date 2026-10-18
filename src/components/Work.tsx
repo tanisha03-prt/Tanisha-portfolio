@@ -3,6 +3,7 @@ import WorkImage from "./WorkImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { projectsData } from "../data/projects";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -21,7 +22,7 @@ const Work = () => {
         ? box[0].parentElement.getBoundingClientRect().width
         : window.innerWidth;
       const padding =
-        parseInt(window.getComputedStyle(box[0]).padding) / 2 || 0;
+        parseInt(window.getComputedStyle(box[0]).padding, 10) / 2 || 0;
       return Math.max(
         0,
         rect.width * box.length - (rectLeft + parentWidth) + padding
@@ -72,6 +73,7 @@ const Work = () => {
       mm.revert();
     };
   }, []);
+
   return (
     <div className="work-section" id="work">
       <div className="work-container section-container">
@@ -79,21 +81,45 @@ const Work = () => {
           My <span>Work</span>
         </h2>
         <div className="work-flex">
-          {[...Array(6)].map((_value, index) => (
-            <div className="work-box" key={index}>
+          {projectsData.map((project) => (
+            <div className="work-box" key={project.id}>
               <div className="work-info">
                 <div className="work-title">
-                  <h3>0{index + 1}</h3>
+                  <h3>{project.number}</h3>
 
                   <div>
-                    <h4>Project Name</h4>
-                    <p>Category</p>
+                    <h4>{project.title}</h4>
+                    <p className="work-category">{project.category}</p>
                   </div>
                 </div>
-                <h4>Tools and features</h4>
-                <p>Javascript, TypeScript, React, Threejs</p>
+
+                <p className="work-description">{project.description}</p>
+
+                <div className="work-tech-badges">
+                  {project.techBadges.map((badge, idx) => (
+                    <span className="work-badge" key={idx}>
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="work-actions">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="work-github-link"
+                    data-cursor="disable"
+                  >
+                    View Code on GitHub
+                  </a>
+                </div>
               </div>
-              <WorkImage image="/images/placeholder.webp" alt="" />
+              <WorkImage
+                image={project.image}
+                alt={project.title}
+                link={project.link || project.github}
+              />
             </div>
           ))}
         </div>
