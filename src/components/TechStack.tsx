@@ -135,34 +135,73 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
 
 const skillCategories = [
   {
-    category: "Languages",
+    category: "Programming Languages",
     icon: FaCode,
-    skills: ["Java", "Python", "JavaScript", "SQL"],
+    skills: ["Java", "Python", "C++", "JavaScript", "SQL"],
   },
   {
-    category: "Frontend",
+    category: "Frontend & Backend",
     icon: FaLaptopCode,
-    skills: ["HTML", "CSS", "React", "Bootstrap"],
+    skills: [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "Flask",
+      "HTML",
+      "CSS",
+      "REST APIs",
+    ],
   },
   {
-    category: "Backend",
-    icon: FaServer,
-    skills: ["Node.js", "Express", "Flask"],
-  },
-  {
-    category: "Database",
+    category: "Databases & Storage",
     icon: FaDatabase,
-    skills: ["MySQL"],
+    skills: [
+      "MySQL",
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "Database Design",
+      "Indexing",
+      "Normalization",
+      "RDBMS Fundamentals",
+    ],
   },
   {
-    category: "Tools & Workflow",
-    icon: FaWrench,
-    skills: ["Git", "GitHub", "VS Code"],
-  },
-  {
-    category: "Core Concepts",
+    category: "Machine Learning & Data Analysis",
     icon: FaBrain,
-    skills: ["DSA", "DBMS", "Machine Learning", "System Design"],
+    skills: [
+      "NumPy",
+      "Pandas",
+      "Scikit-learn",
+      "Matplotlib",
+      "Jupyter Notebook",
+    ],
+  },
+  {
+    category: "Tools & DevOps",
+    icon: FaWrench,
+    skills: [
+      "Git",
+      "GitHub",
+      "Docker",
+      "Maven",
+      "Postman",
+      "VS Code",
+      "IntelliJ IDEA",
+      "Linux / Ubuntu",
+    ],
+  },
+  {
+    category: "Computer Science Fundamentals",
+    icon: FaServer,
+    skills: [
+      "Data Structures & Algorithms",
+      "Object-Oriented Programming",
+      "DBMS",
+      "Operating Systems",
+      "Computer Networks",
+      "System Design",
+    ],
   },
 ];
 
@@ -182,20 +221,26 @@ const TechStack = ({ isDesktopView = true }: TechStackProps) => {
         setIsActive(scrollY > threshold);
       }
     };
-    document.querySelectorAll(".header a").forEach((elem) => {
-      const element = elem as HTMLAnchorElement;
-      element.addEventListener("click", () => {
+    const headerLinks = document.querySelectorAll<HTMLAnchorElement>(".header a");
+    const linkCleanups: Array<() => void> = [];
+
+    headerLinks.forEach((elem) => {
+      const clickHandler = () => {
         const interval = setInterval(() => {
           handleScroll();
         }, 10);
         setTimeout(() => {
           clearInterval(interval);
         }, 1000);
-      });
+      };
+      elem.addEventListener("click", clickHandler);
+      linkCleanups.push(() => elem.removeEventListener("click", clickHandler));
     });
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      linkCleanups.forEach((cleanup) => cleanup());
     };
   }, []);
   const materials = useMemo(() => {
